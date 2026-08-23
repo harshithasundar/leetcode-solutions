@@ -1,30 +1,29 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int count0=0;
-        int count1=0;
-        int count2=0;
+        //one pass: use  3 poiners
+        int low=0;
+        int mid=0;
+        int high = nums.length -1;
 
-        for(int num:nums){
-            if(num==0){
-                count0++;
+        while(mid<=high){
+            if(nums[mid]==0){
+                int temp=nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=temp;
+
+                low++;
+                mid++;
             }
-            else if(num==1){
-                count1++;
+            else if(nums[mid]==1){
+                mid++;
             }
             else{
-                count2++;
-            }
-        }
-        int i=0;
-        while(count0-- >0){
-            nums[i++]=0;
-        }
-        while (count1-- > 0) {
-            nums[i++] = 1;
-        }
+                int temp=nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=temp;
 
-        while (count2-- > 0) {
-            nums[i++] = 2;
+                high--;
+            }
         }
     }
 }
